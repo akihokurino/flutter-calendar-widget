@@ -39,6 +39,7 @@ dependencies:
   flutter_hooks: ^0.18.1
   hooks_riverpod: ^1.0.0
   modal_progress_hud_nsn: ^0.1.0-nullsafety-1
+  uuid: 3.0.5
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,8 @@
+// @dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_widget/ui/calendar.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
@@ -9,15 +12,19 @@ void main() async {
   final app = MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData.dark(),
-    home: const CalendarPage(),
+    home: CalendarPage.init(),
     builder: (context, child) {
       // 端末の文字サイズ設定を無効にする
       return MediaQuery(
-        child: child!,
+        child: child,
         data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       );
     },
   );
 
-  runApp(app);
+  runApp(
+    ProviderScope(
+      child: app,
+    ),
+  );
 }
