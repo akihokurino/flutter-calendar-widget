@@ -149,6 +149,7 @@ class CalendarPage extends HookConsumerWidget {
         preferredSize: const Size.fromHeight(appBarHeight),
         child: AppBar(
           title: Text(calendarState.selectedDayText()),
+          centerTitle: true,
         ),
       ),
       body: ModalProgressHUD(
@@ -164,7 +165,14 @@ class CalendarPage extends HookConsumerWidget {
         foregroundColor: ThemeData.dark().textTheme.bodyText1!.color!,
         child: const Icon(Icons.add),
         onPressed: () {
-          modal(context, RegistrationPage.init());
+          modal(context, RegistrationPage.init(() {
+            calendarAction.syncSchedules(calendarState.focusedDay).then((err) {
+              if (err != null) {
+                AppDialog().showErrorAlert(context, err);
+                return;
+              }
+            });
+          }));
         },
       ),
     );

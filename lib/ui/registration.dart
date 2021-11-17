@@ -10,11 +10,13 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:uuid/uuid.dart';
 
 class RegistrationPage extends HookConsumerWidget {
-  static Widget init() {
-    return RegistrationPage(key: GlobalObjectKey(const Uuid().v4()));
+  static Widget init(VoidCallback callback) {
+    return RegistrationPage(key: GlobalObjectKey(const Uuid().v4()), callback: callback);
   }
 
-  const RegistrationPage({Key? key}) : super(key: key);
+  final VoidCallback callback;
+
+  const RegistrationPage({Key? key, required this.callback}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -69,6 +71,7 @@ class RegistrationPage extends HookConsumerWidget {
                   }
 
                   Navigator.of(context).pop();
+                  callback();
                 },
               ),
             ),
@@ -82,6 +85,7 @@ class RegistrationPage extends HookConsumerWidget {
         preferredSize: const Size.fromHeight(appBarHeight),
         child: AppBar(
           title: const Text("スケジュール登録"),
+          centerTitle: true,
         ),
       ),
       body: ModalProgressHUD(
