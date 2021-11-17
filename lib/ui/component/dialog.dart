@@ -29,12 +29,11 @@ class AppDialog {
               margin: EdgeInsets.zero,
               child: GhostButton(
                   text: "閉じる",
-                  color: ThemeData.dark().primaryColor,
+                  color: ThemeData.dark().textTheme.bodyText1!.color!,
                   onClick: () {
                     Navigator.pop(context);
                   }),
               width: 80,
-              height: 42,
             ),
           ],
         );

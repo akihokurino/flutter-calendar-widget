@@ -11,7 +11,7 @@ import 'package:uuid/uuid.dart';
 
 class RegistrationPage extends HookConsumerWidget {
   static Widget init() {
-    return RegistrationPage(key: GlobalObjectKey(const Uuid().v4.toString()));
+    return RegistrationPage(key: GlobalObjectKey(const Uuid().v4()));
   }
 
   const RegistrationPage({Key? key}) : super(key: key);
@@ -25,6 +25,8 @@ class RegistrationPage extends HookConsumerWidget {
     final name = useState("");
 
     final now = DateTime.now();
+
+    const double appBarHeight = 50;
 
     form() {
       return Container(
@@ -47,7 +49,7 @@ class RegistrationPage extends HookConsumerWidget {
               margin: const EdgeInsets.only(bottom: 20),
               child: TextFieldView(
                   label: "スケジュール名",
-                  value: "",
+                  value: name.value,
                   inputType: TextInputType.text,
                   onSubmit: (val) {
                     name.value = val;
@@ -76,8 +78,11 @@ class RegistrationPage extends HookConsumerWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("スケジュール登録"),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(appBarHeight),
+        child: AppBar(
+          title: const Text("スケジュール登録"),
+        ),
       ),
       body: ModalProgressHUD(
           progressIndicator: CircularProgressIndicator(
