@@ -3,6 +3,7 @@
 - dart2.14
 - hooks_riverpod（ https://riverpod.dev ）
 - flutter_hooks（ https://github.com/rrousselGit/flutter_hooks ）
+- table_calendar（ https://pub.dev/packages/table_calendar ）  
 - firebase auth
 - firestore
 
