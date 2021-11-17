@@ -57,6 +57,7 @@ class CalendarPage extends HookConsumerWidget {
           }
         },
         onPageChanged: (date) {
+          calendarAction.focusDay(date);
           calendarAction.syncSchedules(date).then((err) {
             if (err != null) {
               AppDialog().showErrorAlert(context, err);
@@ -92,7 +93,7 @@ class CalendarPage extends HookConsumerWidget {
         ));
 
     const double appBarHeight = 50;
-    final calendarHeight = calendar.rowHeight * 5 + calendar.daysOfWeekHeight + 70;
+    final calendarHeight = calendar.rowHeight * 6 + calendar.daysOfWeekHeight + 70;
     final listHeight = MediaQuery.of(context).size.height - appBarHeight - calendarHeight - 50;
 
     final content = Container(
@@ -122,7 +123,7 @@ class CalendarPage extends HookConsumerWidget {
                         child: Text(schedule.name, style: ThemeData.dark().textTheme.bodyText1),
                       ),
                       Container(
-                          width: 60,
+                          width: 70,
                           child: Text(schedule.dateDisplayText(), style: ThemeData.dark().textTheme.caption, textAlign: TextAlign.right),
                           margin: const EdgeInsets.only(left: 10))
                     ],

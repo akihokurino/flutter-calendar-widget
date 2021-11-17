@@ -12,7 +12,6 @@ class _Provider extends StateNotifier<_State> {
     final dateYM = DateFormat('yyyy-MM', "ja_JP").format(dt);
     final loginId = FirebaseAuth.instance.currentUser!.uid;
 
-    state = state.setShouldHud(true);
     state = state.setSchedulesInMonth([]);
 
     try {
@@ -21,15 +20,16 @@ class _Provider extends StateNotifier<_State> {
       final schedules = snapshots.docs.map((snap) => Schedule.fromFirestore(snap.data())).toList();
       state = state.setSchedulesInMonth(schedules);
     } catch (e) {
-      state = state.setShouldHud(false);
       return AppError("エラーが発生しました");
     }
-
-    state = state.setShouldHud(false);
   }
 
   Future<AppError?> selectDay(DateTime dt) async {
     state = state.setSelectedDay(dt);
+  }
+
+  Future<AppError?> focusDay(DateTime dt) async {
+    state = state.setFocusedDay(dt);
   }
 
   Future<AppError?> registerSchedule(DateTime? date, String name) async {
@@ -80,6 +80,10 @@ class _State {
 
   _State setSchedulesInMonth(List<Schedule> items) {
     return _State(shouldShowHud: shouldShowHud, schedulesInMonth: items, focusedDay: focusedDay, selectedDay: selectedDay);
+  }
+
+  _State setFocusedDay(DateTime dt) {
+    return _State(shouldShowHud: shouldShowHud, schedulesInMonth: schedulesInMonth, focusedDay: dt, selectedDay: selectedDay);
   }
 
   _State setSelectedDay(DateTime dt) {
