@@ -1,10 +1,10 @@
 import 'dart:collection';
 
+import 'package:calendar/model/schedule.dart';
+import 'package:calendar/provider/calendar.dart';
+import 'package:calendar/ui/component/dialog.dart';
+import 'package:calendar/ui/registration.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_calendar_widget/model/schedule.dart';
-import 'package:flutter_calendar_widget/provider/calendar.dart';
-import 'package:flutter_calendar_widget/ui/component/dialog.dart';
-import 'package:flutter_calendar_widget/ui/registration.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';

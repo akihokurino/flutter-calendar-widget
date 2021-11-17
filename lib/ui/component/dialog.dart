@@ -1,5 +1,5 @@
+import 'package:calendar/ui/component/buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_calendar_widget/ui/component/buttons.dart';
 
 class AppDialog {
   static final AppDialog _singleton = AppDialog._internal();

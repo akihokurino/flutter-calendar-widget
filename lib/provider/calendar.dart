@@ -1,7 +1,7 @@
+import 'package:calendar/model/errors.dart';
+import 'package:calendar/model/schedule.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_calendar_widget/model/errors.dart';
-import 'package:flutter_calendar_widget/model/schedule.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 

@@ -1,9 +1,9 @@
+import 'package:calendar/provider/calendar.dart';
+import 'package:calendar/ui/component/buttons.dart';
+import 'package:calendar/ui/component/date_picker_view.dart';
+import 'package:calendar/ui/component/dialog.dart';
+import 'package:calendar/ui/component/text_field_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_calendar_widget/provider/calendar.dart';
-import 'package:flutter_calendar_widget/ui/component/buttons.dart';
-import 'package:flutter_calendar_widget/ui/component/date_picker_view.dart';
-import 'package:flutter_calendar_widget/ui/component/dialog.dart';
-import 'package:flutter_calendar_widget/ui/component/text_field_view.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';

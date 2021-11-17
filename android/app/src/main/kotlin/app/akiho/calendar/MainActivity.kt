@@ -1,4 +1,4 @@
-package com.example.flutter_calendar_widget
+package app.akiho.calendar
 
 import io.flutter.embedding.android.FlutterActivity
 

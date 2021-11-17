@@ -1,8 +1,8 @@
+import 'package:calendar/library/date_picker/date_picker.dart';
+import 'package:calendar/library/date_picker/date_picker_theme.dart';
+import 'package:calendar/library/date_picker/i18n/date_picker_i18n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_calendar_widget/library/date_picker/date_picker.dart';
-import 'package:flutter_calendar_widget/library/date_picker/date_picker_theme.dart';
-import 'package:flutter_calendar_widget/library/date_picker/i18n/date_picker_i18n.dart';
 import 'package:intl/intl.dart';
 
 final _theme = DateTimePickerTheme(
