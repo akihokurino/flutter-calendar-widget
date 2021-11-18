@@ -17,7 +17,7 @@ class _Provider extends StateNotifier<_State> {
 
     try {
       final ref = FirebaseFirestore.instance.collection("schedule/$loginId/$dateYM");
-      final snapshots = await ref.get();
+      final snapshots = await ref.orderBy("createdAtTimestamp").get();
       final schedules = snapshots.docs.map((snap) => Schedule.fromFirestore(snap.data())).toList();
       state = state.setSchedulesInMonth(schedules);
     } catch (e) {
@@ -26,16 +26,23 @@ class _Provider extends StateNotifier<_State> {
   }
 
   Future<AppError?> selectDay(DateTime dt) async {
-    HomeWidget.saveWidgetData<String>('selectedDate', DateFormat('yy年MM月dd日', "ja_JP").format(dt));
+    HomeWidget.saveWidgetData<String>('selectedDate', DateFormat('yyyy-MM-dd', "ja_JP").format(dt));
     HomeWidget.updateWidget(
       name: 'HomeWidget',
       androidName: 'HomeWidget',
       iOSName: 'HomeWidget',
     );
+
     state = state.setSelectedDay(dt);
   }
 
   Future<AppError?> focusDay(DateTime dt) async {
+    HomeWidget.updateWidget(
+      name: 'HomeWidget',
+      androidName: 'HomeWidget',
+      iOSName: 'HomeWidget',
+    );
+
     state = state.setFocusedDay(dt);
   }
 
@@ -55,6 +62,12 @@ class _Provider extends StateNotifier<_State> {
       state = state.setShouldHud(false);
       return AppError("エラーが発生しました");
     }
+
+    HomeWidget.updateWidget(
+      name: 'HomeWidget',
+      androidName: 'HomeWidget',
+      iOSName: 'HomeWidget',
+    );
 
     state = state.setShouldHud(false);
   }
