@@ -1,21 +1,32 @@
+import FirebaseAuth
+import FirebaseCore
+import FirebaseFirestore
 import Intents
 import SwiftUI
 import WidgetKit
-//import FirebaseCore
-//import FirebaseAuth
-//import FirebaseFirestore
 
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), dateYMD: "21年1月1日", configuration: ConfigurationIntent())
+        SimpleEntry(
+            loginId: "",
+            date: Date(),
+            dateYMD: "21年1月1日",
+            configuration: ConfigurationIntent()
+        )
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), dateYMD: "21年1月1日", configuration: configuration)
+        let entry = SimpleEntry(
+            loginId: "",
+            date: Date(),
+            dateYMD: "21年1月1日",
+            configuration: configuration
+        )
         completion(entry)
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+        let loginId = Auth.auth().currentUser!.uid
         let userDefaults = UserDefaults(suiteName: "group.app.akiho.calendar")
         let dateYMD = userDefaults?.string(forKey: "selectedDate") ?? ""
 
@@ -25,7 +36,12 @@ struct Provider: IntentTimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, dateYMD: dateYMD, configuration: configuration)
+            let entry = SimpleEntry(
+                loginId: loginId,
+                date: entryDate,
+                dateYMD: dateYMD,
+                configuration: configuration
+            )
             entries.append(entry)
         }
 
@@ -35,6 +51,7 @@ struct Provider: IntentTimelineProvider {
 }
 
 struct SimpleEntry: TimelineEntry {
+    let loginId: String
     let date: Date
     let dateYMD: String
     let configuration: ConfigurationIntent
@@ -45,7 +62,8 @@ struct WidgetEntryView: View {
 
     var body: some View {
         Text(entry.dateYMD).font(.body)
-        Text(entry.date, style: .time).padding()
+        Text(entry.loginId).font(.body)
+        Text(entry.date, style: .time)
     }
 }
 
@@ -53,9 +71,10 @@ struct WidgetEntryView: View {
 struct HomeWidget: Widget {
     let kind: String = "HomeWidget"
 
-//    init() {
-//        FirebaseApp.configure()
-//    }
+    init() {
+        FirebaseApp.configure()
+        try? Auth.auth().useUserAccessGroup("\(Env().teamId).app.akiho.calendar.keychain")
+    }
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in

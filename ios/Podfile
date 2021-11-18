@@ -36,6 +36,10 @@ end
 
 target 'WidgetExtension' do
   use_frameworks!
+
+  # pubspec.yamlでインストールしているFirebaseが使いたい。。。
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
 end
 
 post_install do |installer|
