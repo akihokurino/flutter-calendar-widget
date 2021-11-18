@@ -6,6 +6,11 @@
 - table_calendar（ https://pub.dev/packages/table_calendar ）  
 - firebase auth
 - firestore
+- ios widget kit
+- android app widget
+- app group
+- keychain sharing  
+- home_widget（ https://pub.dev/packages/home_widget ）
 
 ## Images
 ### iOS

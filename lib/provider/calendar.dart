@@ -2,6 +2,7 @@ import 'package:calendar/model/errors.dart';
 import 'package:calendar/model/schedule.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:home_widget/home_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
@@ -25,6 +26,12 @@ class _Provider extends StateNotifier<_State> {
   }
 
   Future<AppError?> selectDay(DateTime dt) async {
+    HomeWidget.saveWidgetData<String>('selectedDate', DateFormat('yy年MM月dd日', "ja_JP").format(dt));
+    HomeWidget.updateWidget(
+      name: 'HomeWidget',
+      androidName: 'HomeWidget',
+      iOSName: 'HomeWidget',
+    );
     state = state.setSelectedDay(dt);
   }
 
