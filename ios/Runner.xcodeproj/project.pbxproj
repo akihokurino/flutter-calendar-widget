@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		0273839027479D690052C32F /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273838E27479C020052C32F /* Environment.swift */; };
+		027383982747A05C0052C32F /* WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273839127479FB10052C32F /* WidgetBundle.swift */; };
+		0273839B2747A2120052C32F /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027383992747A1FD0052C32F /* Provider.swift */; };
 		0284AAB8274696320027C603 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02FADF7F2744AF5800C64507 /* GoogleService-Info.plist */; };
 		02AE39E6274625FE00B1F087 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AE39E5274625FE00B1F087 /* WidgetKit.framework */; };
 		02AE39E8274625FE00B1F087 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AE39E7274625FE00B1F087 /* SwiftUI.framework */; };
-		02AE39EB274625FE00B1F087 /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AE39EA274625FE00B1F087 /* Widget.swift */; };
+		02AE39EB274625FE00B1F087 /* SmallWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AE39EA274625FE00B1F087 /* SmallWidget.swift */; };
 		02AE39EE2746260000B1F087 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02AE39ED2746260000B1F087 /* Assets.xcassets */; };
 		02AE39F02746260000B1F087 /* Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 02AE39EC274625FE00B1F087 /* Widget.intentdefinition */; };
 		02AE39F12746260000B1F087 /* Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 02AE39EC274625FE00B1F087 /* Widget.intentdefinition */; };
@@ -63,12 +65,14 @@
 
 /* Begin PBXFileReference section */
 		0273838E27479C020052C32F /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		0273839127479FB10052C32F /* WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBundle.swift; sourceTree = "<group>"; };
+		027383992747A1FD0052C32F /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		0284AAAE274674980027C603 /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0284AAB227467F700027C603 /* FirebaseAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		02AE39E4274625FE00B1F087 /* WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		02AE39E5274625FE00B1F087 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		02AE39E7274625FE00B1F087 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		02AE39EA274625FE00B1F087 /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
+		02AE39EA274625FE00B1F087 /* SmallWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidget.swift; sourceTree = "<group>"; };
 		02AE39EC274625FE00B1F087 /* Widget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Widget.intentdefinition; sourceTree = "<group>"; };
 		02AE39ED2746260000B1F087 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02AE39EF2746260000B1F087 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -127,7 +131,9 @@
 			isa = PBXGroup;
 			children = (
 				0273838E27479C020052C32F /* Environment.swift */,
-				02AE39EA274625FE00B1F087 /* Widget.swift */,
+				027383992747A1FD0052C32F /* Provider.swift */,
+				0273839127479FB10052C32F /* WidgetBundle.swift */,
+				02AE39EA274625FE00B1F087 /* SmallWidget.swift */,
 				02AE39EC274625FE00B1F087 /* Widget.intentdefinition */,
 				02AE39ED2746260000B1F087 /* Assets.xcassets */,
 				02AE39EF2746260000B1F087 /* Info.plist */,
@@ -439,7 +445,9 @@
 			files = (
 				02AE39F02746260000B1F087 /* Widget.intentdefinition in Sources */,
 				0273839027479D690052C32F /* Environment.swift in Sources */,
-				02AE39EB274625FE00B1F087 /* Widget.swift in Sources */,
+				02AE39EB274625FE00B1F087 /* SmallWidget.swift in Sources */,
+				0273839B2747A2120052C32F /* Provider.swift in Sources */,
+				027383982747A05C0052C32F /* WidgetBundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

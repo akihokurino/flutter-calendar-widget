@@ -1,5 +1,4 @@
 import FirebaseAuth
-import FirebaseCore
 import FirebaseFirestore
 import Intents
 import SwiftUI
@@ -11,11 +10,14 @@ struct Schedule: Identifiable {
 }
 
 struct Provider: IntentTimelineProvider {
+    typealias Entry = SimpleEntry
+    
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(
             date: Date(),
             dayOfWeek: "日曜日",
             day: "01",
+            selectedYMD: "2021-01-01",
             schedules: [],
             configuration: ConfigurationIntent()
         )
@@ -26,6 +28,7 @@ struct Provider: IntentTimelineProvider {
             date: Date(),
             dayOfWeek: "日曜日",
             day: "01",
+            selectedYMD: "2021-01-01",
             schedules: [],
             configuration: configuration
         )
@@ -60,8 +63,7 @@ struct Provider: IntentTimelineProvider {
         }
 
         let userDefaults = UserDefaults(suiteName: "group.app.akiho.calendar")
-        let dateYMD = userDefaults?.string(forKey: "selectedDate") ?? ""
-        print("保存した日付 \(dateYMD)")
+        let selectedYMD = userDefaults?.string(forKey: "selectedDate") ?? ""
 
         let loginId = Auth.auth().currentUser!.uid
         let db = Firestore.firestore()
@@ -74,6 +76,7 @@ struct Provider: IntentTimelineProvider {
                         date: date,
                         dayOfWeek: "",
                         day: "",
+                        selectedYMD: "",
                         schedules: [],
                         configuration: configuration
                     )], policy: .atEnd)
@@ -93,6 +96,7 @@ struct Provider: IntentTimelineProvider {
                         date: entryDate,
                         dayOfWeek: dayOfWeek,
                         day: day,
+                        selectedYMD: selectedYMD,
                         schedules: schedules,
                         configuration: configuration
                     )
@@ -108,85 +112,7 @@ struct SimpleEntry: TimelineEntry {
     let date: Date
     let dayOfWeek: String
     let day: String
+    let selectedYMD: String
     let schedules: [Schedule]
     let configuration: ConfigurationIntent
-}
-
-struct WidgetEntryView: View {
-    var entry: Provider.Entry
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(entry.dayOfWeek).font(.system(size: 12))
-                .foregroundColor(Color.white.opacity(0.8))
-            Spacer().frame(height: 5)
-            Text(entry.day).font(.system(size: 20)).fontWeight(.bold)
-                .foregroundColor(Color.white)
-            Spacer()
-            if entry.schedules.count > 0 {
-                Text(entry.schedules[0].name)
-                    .lineLimit(1)
-                    .font(.system(size: 14))
-                    .padding(.horizontal, 5)
-                    .frame(height: 35)
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    .background(Color.blue.opacity(0.8))
-                    .cornerRadius(8)
-            }
-            if entry.schedules.count > 1 {
-                Text(entry.schedules[1].name)
-                    .lineLimit(1)
-                    .font(.system(size: 14))
-                    .padding(.horizontal, 5)
-                    .frame(height: 35)
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    .background(Color.blue.opacity(0.8))
-                    .cornerRadius(8)
-            }
-        }
-        .frame(
-            minWidth: 0,
-            maxWidth: .infinity,
-            minHeight: 0,
-            maxHeight: .infinity,
-            alignment: .topLeading
-        )
-        .padding(10)
-        .background(Color(red: 41.0 / 255.0, green: 42.0 / 255.0, blue: 47.0 / 255.0, opacity: 1.0))
-    }
-}
-
-struct WidgetEntryView_Previews: PreviewProvider {
-    static var previews: some View {
-        WidgetEntryView(entry:
-            SimpleEntry(
-                date: Date(),
-                dayOfWeek: "日曜日",
-                day: "01",
-                schedules: [
-                    Schedule(id: "1", name: "スケジュールA"),
-                    Schedule(id: "1", name: "スケジュールB"),
-                ],
-                configuration: ConfigurationIntent()
-            ))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-    }
-}
-
-@main
-struct HomeWidget: Widget {
-    let kind: String = "HomeWidget"
-
-    init() {
-        FirebaseApp.configure()
-        try? Auth.auth().useUserAccessGroup("\(Env["IOS_TEAM_ID"]!).app.akiho.calendar.keychain")
-    }
-
-    var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
-            WidgetEntryView(entry: entry)
-        }
-        .configurationDisplayName("WidgetConfiguration")
-        .description("widget for calendar schedules")
-    }
 }
