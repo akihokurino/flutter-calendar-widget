@@ -85,13 +85,20 @@ struct Provider: IntentTimelineProvider {
                     Schedule(id: $0.get("id") as! String, name: $0.get("name") as! String)
                 }
 
-                let timeline = Timeline(entries: [SimpleEntry(
-                    date: date,
-                    dayOfWeek: dayOfWeek,
-                    day: day,
-                    schedules: schedules,
-                    configuration: configuration
-                )], policy: .atEnd)
+                var entries: [SimpleEntry] = []
+                // 1時間に1度更新が走るようにする
+                for hourOffset in 0 ..< 24 {
+                    let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: date)!
+                    let entry = SimpleEntry(
+                        date: entryDate,
+                        dayOfWeek: dayOfWeek,
+                        day: day,
+                        schedules: schedules,
+                        configuration: configuration
+                    )
+                    entries.append(entry)
+                }
+                let timeline = Timeline(entries: entries, policy: .atEnd)
                 completion(timeline)
             }
     }
@@ -172,14 +179,14 @@ struct HomeWidget: Widget {
 
     init() {
         FirebaseApp.configure()
-        try? Auth.auth().useUserAccessGroup("\(Env().teamId).app.akiho.calendar.keychain")
+        try? Auth.auth().useUserAccessGroup("\(Env["IOS_TEAM_ID"]!).app.akiho.calendar.keychain")
     }
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             WidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("WidgetConfiguration")
+        .description("widget for calendar schedules")
     }
 }

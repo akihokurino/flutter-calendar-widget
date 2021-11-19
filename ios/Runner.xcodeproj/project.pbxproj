@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0284AAB7274682F30027C603 /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0284AAB6274682F30027C603 /* Env.swift */; };
+		0273839027479D690052C32F /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273838E27479C020052C32F /* Environment.swift */; };
 		0284AAB8274696320027C603 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02FADF7F2744AF5800C64507 /* GoogleService-Info.plist */; };
 		02AE39E6274625FE00B1F087 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AE39E5274625FE00B1F087 /* WidgetKit.framework */; };
 		02AE39E8274625FE00B1F087 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AE39E7274625FE00B1F087 /* SwiftUI.framework */; };
@@ -62,9 +62,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0273838E27479C020052C32F /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		0284AAAE274674980027C603 /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0284AAB227467F700027C603 /* FirebaseAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0284AAB6274682F30027C603 /* Env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Env.swift; sourceTree = "<group>"; };
 		02AE39E4274625FE00B1F087 /* WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		02AE39E5274625FE00B1F087 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		02AE39E7274625FE00B1F087 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -126,8 +126,8 @@
 		02AE39E9274625FE00B1F087 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
+				0273838E27479C020052C32F /* Environment.swift */,
 				02AE39EA274625FE00B1F087 /* Widget.swift */,
-				0284AAB6274682F30027C603 /* Env.swift */,
 				02AE39EC274625FE00B1F087 /* Widget.intentdefinition */,
 				02AE39ED2746260000B1F087 /* Assets.xcassets */,
 				02AE39EF2746260000B1F087 /* Info.plist */,
@@ -221,6 +221,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 02AE39F92746260000B1F087 /* Build configuration list for PBXNativeTarget "WidgetExtension" */;
 			buildPhases = (
+				0273838D274799920052C32F /* Build Env */,
 				74C8DC5DABC712B4C1D6B793 /* [CP] Check Pods Manifest.lock */,
 				02AE39E0274625FE00B1F087 /* Sources */,
 				02AE39E1274625FE00B1F087 /* Frameworks */,
@@ -322,6 +323,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0273838D274799920052C32F /* Build Env */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Env";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/build-env.sh\" \"${SRCROOT}/.env\" \"${SRCROOT}/Widget\"\n";
+		};
 		3B06AD1E1E4923F5004D2608 /* Thin Binary */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -419,7 +438,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02AE39F02746260000B1F087 /* Widget.intentdefinition in Sources */,
-				0284AAB7274682F30027C603 /* Env.swift in Sources */,
+				0273839027479D690052C32F /* Environment.swift in Sources */,
 				02AE39EB274625FE00B1F087 /* Widget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
