@@ -16,8 +16,11 @@ struct Provider: IntentTimelineProvider {
         SimpleEntry(
             date: Date(),
             dayOfWeek: "日曜日",
+            year: "2021",
+            month: "01",
             day: "01",
             selectedYMD: "2021-01-01",
+            focusedYMD: "2021-01-01",
             schedules: [],
             configuration: ConfigurationIntent()
         )
@@ -27,8 +30,11 @@ struct Provider: IntentTimelineProvider {
         let entry = SimpleEntry(
             date: Date(),
             dayOfWeek: "日曜日",
+            year: "2021",
+            month: "01",
             day: "01",
             selectedYMD: "2021-01-01",
+            focusedYMD: "2021-01-01",
             schedules: [],
             configuration: configuration
         )
@@ -64,6 +70,7 @@ struct Provider: IntentTimelineProvider {
 
         let userDefaults = UserDefaults(suiteName: "group.app.akiho.calendar")
         let selectedYMD = userDefaults?.string(forKey: "selectedDate") ?? ""
+        let focusedYMD = userDefaults?.string(forKey: "focusedDate") ?? ""
 
         let loginId = Auth.auth().currentUser!.uid
         let db = Firestore.firestore()
@@ -74,9 +81,12 @@ struct Provider: IntentTimelineProvider {
                 if err != nil {
                     let timeline = Timeline(entries: [SimpleEntry(
                         date: date,
-                        dayOfWeek: "",
-                        day: "",
-                        selectedYMD: "",
+                        dayOfWeek: dayOfWeek,
+                        year: "\(year)",
+                        month: month,
+                        day: day,
+                        selectedYMD: selectedYMD,
+                        focusedYMD: focusedYMD,
                         schedules: [],
                         configuration: configuration
                     )], policy: .atEnd)
@@ -95,8 +105,11 @@ struct Provider: IntentTimelineProvider {
                     let entry = SimpleEntry(
                         date: entryDate,
                         dayOfWeek: dayOfWeek,
+                        year: "\(year)",
+                        month: month,
                         day: day,
                         selectedYMD: selectedYMD,
+                        focusedYMD: focusedYMD,
                         schedules: schedules,
                         configuration: configuration
                     )
@@ -111,8 +124,11 @@ struct Provider: IntentTimelineProvider {
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let dayOfWeek: String
+    let year: String
+    let month: String
     let day: String
     let selectedYMD: String
+    let focusedYMD: String
     let schedules: [Schedule]
     let configuration: ConfigurationIntent
 }

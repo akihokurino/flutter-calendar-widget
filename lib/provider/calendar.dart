@@ -26,22 +26,15 @@ class _Provider extends StateNotifier<_State> {
   }
 
   Future<AppError?> selectDay(DateTime dt) async {
-    HomeWidget.saveWidgetData<String>('selectedDate', DateFormat('yyyy-MM-dd', "ja_JP").format(dt));
-    HomeWidget.updateWidget(
-      name: 'HomeWidget',
-      androidName: 'HomeWidget',
-      iOSName: 'HomeWidget',
-    );
+    HomeWidget.saveWidgetData<String>("selectedDate", DateFormat("yyyy-MM-dd", "ja_JP").format(dt));
+    _updateWidget();
 
     state = state.setSelectedDay(dt);
   }
 
   Future<AppError?> focusDay(DateTime dt) async {
-    HomeWidget.updateWidget(
-      name: 'HomeWidget',
-      androidName: 'HomeWidget',
-      iOSName: 'HomeWidget',
-    );
+    HomeWidget.saveWidgetData<String>("focusedDate", DateFormat("yyyy-MM-dd", "ja_JP").format(dt));
+    _updateWidget();
 
     state = state.setFocusedDay(dt);
   }
@@ -63,13 +56,15 @@ class _Provider extends StateNotifier<_State> {
       return AppError("エラーが発生しました");
     }
 
-    HomeWidget.updateWidget(
-      name: 'HomeWidget',
-      androidName: 'HomeWidget',
-      iOSName: 'HomeWidget',
-    );
+    _updateWidget();
 
     state = state.setShouldHud(false);
+  }
+
+  void _updateWidget() {
+    HomeWidget.updateWidget(name: "SmallWidget", androidName: "SmallWidget", iOSName: "SmallWidget");
+    HomeWidget.updateWidget(name: "MediumWidget", androidName: "MediumWidget", iOSName: "MediumWidget");
+    HomeWidget.updateWidget(name: "LargeWidget", androidName: "LargeWidget", iOSName: "LargeWidget");
   }
 }
 

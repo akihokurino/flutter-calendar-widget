@@ -2,15 +2,16 @@ import Intents
 import SwiftUI
 import WidgetKit
 
-struct SmallEntryView: View {
+struct MediumEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
         VStack(alignment: .leading) {
             Text(entry.dayOfWeek).font(.system(size: 12))
                 .foregroundColor(Color.white.opacity(0.8))
+        
             Spacer().frame(height: 5)
-            Text(entry.day).font(.system(size: 20)).fontWeight(.bold)
+            Text("\(entry.year)-\(entry.month)-\(entry.day)").font(.system(size: 20)).fontWeight(.bold)
                 .foregroundColor(Color.white)
             
             Spacer()
@@ -47,9 +48,9 @@ struct SmallEntryView: View {
     }
 }
 
-struct SmallEntryView_Previews: PreviewProvider {
+struct MediumEntryView_Previews: PreviewProvider {
     static var previews: some View {
-        SmallEntryView(entry:
+        MediumEntryView(entry:
             SimpleEntry(
                 date: Date(),
                 dayOfWeek: "日曜日",
@@ -64,19 +65,19 @@ struct SmallEntryView_Previews: PreviewProvider {
                 ],
                 configuration: ConfigurationIntent()
             ))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }
 
-struct SmallWidget: Widget {
-    let kind: String = "SmallWidget"
+struct MediumWidget: Widget {
+    let kind: String = "MediumWidget"
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
-            SmallEntryView(entry: entry)
+            MediumEntryView(entry: entry)
         }
-        .configurationDisplayName("Small")
+        .configurationDisplayName("Medium")
         .description("widget for calendar schedules")
-        .supportedFamilies([.systemSmall])
+        .supportedFamilies([.systemMedium])
     }
 }
