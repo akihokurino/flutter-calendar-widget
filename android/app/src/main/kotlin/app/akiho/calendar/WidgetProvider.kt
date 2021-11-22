@@ -26,6 +26,7 @@ class WidgetProvider : HomeWidgetProvider() {
 
         val user = Firebase.auth.currentUser
         Firebase.firestore.collection("schedule/${user!!.uid}/${year}-${month}")
+            .whereEqualTo("dateYMD", "${year}-${month}-${day}")
             .orderBy("createdAtTimestamp")
             .limit(2)
             .get()
