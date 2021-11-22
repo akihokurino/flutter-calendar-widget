@@ -77,6 +77,7 @@ struct Provider: IntentTimelineProvider {
         db.collection("schedule/\(loginId)/\(year)-\(month)")
             .whereField("dateYMD", isEqualTo: "\(year)-\(month)-\(day)")
             .order(by: "createdAtTimestamp")
+            .limit(to: 4)
             .getDocuments { collection, err in
                 if err != nil {
                     let timeline = Timeline(entries: [SimpleEntry(
