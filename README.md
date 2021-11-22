@@ -18,3 +18,4 @@
 
 ### Android
 <img width="393" alt="スクリーンショット 2021-11-17 17 40 27" src="https://user-images.githubusercontent.com/2268288/142170926-629d256c-c8a9-4563-bad9-d8574b8ebe97.png">
+![Screenshot_20211122-181552](https://user-images.githubusercontent.com/2268288/142840271-faa3c10a-2275-4c33-b86c-4448910bec2f.png)
