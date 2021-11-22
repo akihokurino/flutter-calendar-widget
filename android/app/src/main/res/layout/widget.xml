@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    android:orientation="vertical"
+    android:background="#292a2f"
+    android:padding="20dp"
+    android:id="@+id/widget_container">
+
+    <TextView
+        android:id="@+id/widget_week"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        tools:text="月曜日" />
+
+    <TextView
+        android:id="@+id/widget_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textSize="25sp"
+        android:textColor="#fff"
+        tools:text="01" />
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/schedules"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        </FrameLayout>
+        <TextView
+            android:id="@+id/schedule_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:textColor="#fff"
+            android:background="@drawable/schedule_background"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp"
+            tools:text="スケジュール" />
+        <TextView
+            android:id="@+id/schedule_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:textColor="#fff"
+            android:background="@drawable/schedule_background"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp"
+            tools:text="スケジュール" />
+    </LinearLayout>
+</LinearLayout>

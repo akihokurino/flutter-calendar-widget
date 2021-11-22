@@ -16,9 +16,12 @@ class _Provider extends StateNotifier<_State> {
     state = state.setSchedulesInMonth([]);
 
     try {
-      final ref = FirebaseFirestore.instance.collection("schedule/$loginId/$dateYM");
+      final ref =
+          FirebaseFirestore.instance.collection("schedule/$loginId/$dateYM");
       final snapshots = await ref.orderBy("createdAtTimestamp").get();
-      final schedules = snapshots.docs.map((snap) => Schedule.fromFirestore(snap.data())).toList();
+      final schedules = snapshots.docs
+          .map((snap) => Schedule.fromFirestore(snap.data()))
+          .toList();
       state = state.setSchedulesInMonth(schedules);
     } catch (e) {
       return AppError("エラーが発生しました");
@@ -26,14 +29,16 @@ class _Provider extends StateNotifier<_State> {
   }
 
   Future<AppError?> selectDay(DateTime dt) async {
-    HomeWidget.saveWidgetData<String>("selectedDate", DateFormat("yyyy-MM-dd", "ja_JP").format(dt));
+    HomeWidget.saveWidgetData<String>(
+        "selectedDate", DateFormat("yyyy-MM-dd", "ja_JP").format(dt));
     _updateWidget();
 
     state = state.setSelectedDay(dt);
   }
 
   Future<AppError?> focusDay(DateTime dt) async {
-    HomeWidget.saveWidgetData<String>("focusedDate", DateFormat("yyyy-MM-dd", "ja_JP").format(dt));
+    HomeWidget.saveWidgetData<String>(
+        "focusedDate", DateFormat("yyyy-MM-dd", "ja_JP").format(dt));
     _updateWidget();
 
     state = state.setFocusedDay(dt);
@@ -49,7 +54,8 @@ class _Provider extends StateNotifier<_State> {
     state = state.setShouldHud(true);
 
     try {
-      final ref = FirebaseFirestore.instance.collection("schedule/$loginId/${schedule.dateYM}");
+      final ref = FirebaseFirestore.instance
+          .collection("schedule/$loginId/${schedule.dateYM}");
       await ref.doc(schedule.id).set(schedule.toFirestore());
     } catch (e) {
       state = state.setShouldHud(false);
@@ -62,9 +68,18 @@ class _Provider extends StateNotifier<_State> {
   }
 
   void _updateWidget() {
-    HomeWidget.updateWidget(name: "SmallWidget", androidName: "SmallWidget", iOSName: "SmallWidget");
-    HomeWidget.updateWidget(name: "MediumWidget", androidName: "MediumWidget", iOSName: "MediumWidget");
-    HomeWidget.updateWidget(name: "LargeWidget", androidName: "LargeWidget", iOSName: "LargeWidget");
+    HomeWidget.updateWidget(
+        name: "SmallWidget",
+        androidName: "WidgetProvider",
+        iOSName: "SmallWidget");
+    HomeWidget.updateWidget(
+        name: "MediumWidget",
+        androidName: "WidgetProvider",
+        iOSName: "MediumWidget");
+    HomeWidget.updateWidget(
+        name: "LargeWidget",
+        androidName: "WidgetProvider",
+        iOSName: "LargeWidget");
   }
 }
 
@@ -83,27 +98,52 @@ class _State {
     return schedulesInMonth.where((v) => v.dateYMD == dateYMD).toList();
   }
 
-  _State({required this.shouldShowHud, required this.schedulesInMonth, required this.focusedDay, required this.selectedDay});
+  _State(
+      {required this.shouldShowHud,
+      required this.schedulesInMonth,
+      required this.focusedDay,
+      required this.selectedDay});
 
   static _State init() {
-    return _State(shouldShowHud: false, schedulesInMonth: [], focusedDay: DateTime.now(), selectedDay: DateTime.now());
+    return _State(
+        shouldShowHud: false,
+        schedulesInMonth: [],
+        focusedDay: DateTime.now(),
+        selectedDay: DateTime.now());
   }
 
   _State setShouldHud(bool should) {
-    return _State(shouldShowHud: should, schedulesInMonth: schedulesInMonth, focusedDay: focusedDay, selectedDay: selectedDay);
+    return _State(
+        shouldShowHud: should,
+        schedulesInMonth: schedulesInMonth,
+        focusedDay: focusedDay,
+        selectedDay: selectedDay);
   }
 
   _State setSchedulesInMonth(List<Schedule> items) {
-    return _State(shouldShowHud: shouldShowHud, schedulesInMonth: items, focusedDay: focusedDay, selectedDay: selectedDay);
+    return _State(
+        shouldShowHud: shouldShowHud,
+        schedulesInMonth: items,
+        focusedDay: focusedDay,
+        selectedDay: selectedDay);
   }
 
   _State setFocusedDay(DateTime dt) {
-    return _State(shouldShowHud: shouldShowHud, schedulesInMonth: schedulesInMonth, focusedDay: dt, selectedDay: selectedDay);
+    return _State(
+        shouldShowHud: shouldShowHud,
+        schedulesInMonth: schedulesInMonth,
+        focusedDay: dt,
+        selectedDay: selectedDay);
   }
 
   _State setSelectedDay(DateTime dt) {
-    return _State(shouldShowHud: shouldShowHud, schedulesInMonth: schedulesInMonth, focusedDay: focusedDay, selectedDay: dt);
+    return _State(
+        shouldShowHud: shouldShowHud,
+        schedulesInMonth: schedulesInMonth,
+        focusedDay: focusedDay,
+        selectedDay: dt);
   }
 }
 
-final calendarProvider = StateNotifierProvider<_Provider, _State>((_) => _Provider());
+final calendarProvider =
+    StateNotifierProvider<_Provider, _State>((_) => _Provider());
