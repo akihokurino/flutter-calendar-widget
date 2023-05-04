@@ -1,4 +1,4 @@
-## Specs
+## Used, Dependency
 - flutter2
 - dart2.14
 - hooks_riverpod（ https://riverpod.dev ）
